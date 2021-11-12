@@ -1,0 +1,7 @@
+#------------------------------------
+# Spring settings
+#------------------------------------
+
+spring:
+  flyway:
+    validate-on-migrate: false
