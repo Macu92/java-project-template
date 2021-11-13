@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import springfox.documentation.annotations.ApiIgnore;
 import springfox.documentation.swagger.common.SwaggerPluginSupport;
 
 import javax.annotation.PostConstruct;
@@ -18,6 +19,7 @@ import java.util.*;
 @Slf4j
 @Controller
 @Order(value = SwaggerPluginSupport.SWAGGER_PLUGIN_ORDER)
+@ApiIgnore
 class DocumentationController {
 
   @Value("${documentation.title:}")
