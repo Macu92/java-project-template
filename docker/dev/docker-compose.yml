@@ -1,0 +1,20 @@
+# Use postgres/example user/password credentials
+## RUN COMMAND
+## docker-compose up -d
+
+services:
+  postgresql-db:
+    build: postgresql
+    image: new-project-name-postgresql
+    container_name: new-project-name-postgresql
+    restart: always
+    networks:
+      - new-project-name-network
+    ports:
+      - "15433:5432"
+    environment:
+      POSTGRES_PASSWORD: PostgressAdmin#123
+    volumes:
+      - ./pg_backups:/backups/
+networks:
+  new-project-name-network:

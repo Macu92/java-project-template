@@ -37,7 +37,7 @@ spring:
   #------------------------------------
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/database
+    url: jdbc:postgresql://localhost:15433/new_project_name_db
     username: root
     password: adminadmin
     driver-class-name: org.postgresql.Driver
@@ -85,5 +85,5 @@ documentation:
   title: @pom.name@
 
 # This is required to change the default swagger api-docs endpoint from /v2/api-docs
-springfox.documentation.swagger.v2.path: /documentation/swagger-v2
+springdoc.swagger-ui.path: /documentation/swagger
 

@@ -2,24 +2,18 @@ package com.macu.template.config.documentation;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import springfox.documentation.annotations.ApiIgnore;
-import springfox.documentation.swagger.common.SwaggerPluginSupport;
-
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.*;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Slf4j
 @Controller
-@Order(value = SwaggerPluginSupport.SWAGGER_PLUGIN_ORDER)
-@ApiIgnore
 class DocumentationController {
 
   @Value("${documentation.title:}")

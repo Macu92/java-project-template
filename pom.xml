@@ -12,23 +12,22 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.6</version>
+		<version>3.3.2</version>
 		<relativePath/>
 	</parent>
 
 	<properties>
-		<!-- TODO update do 17 -->
-    <java.version>11</java.version>
-		<mapstruct.version>1.4.2.Final</mapstruct.version>
-		<swagger.version>3.0.0</swagger.version>
-		<spock-spring.version>2.0-groovy-3.0</spock-spring.version>
-		<mybatis.version>3.5.7</mybatis.version>
-		<mybatis-spring-boot-starter.version>2.2.0</mybatis-spring-boot-starter.version>
+    <java.version>21</java.version>
+		<mapstruct.version>1.5.5.Final</mapstruct.version>
+		<springdoc.version>2.6.0</springdoc.version>
+		<spock-spring.version>2.4-M4-groovy-4.0</spock-spring.version>
+		<mybatis.version>3.5.16</mybatis.version>
+		<mybatis-spring-boot-starter.version>3.0.3</mybatis-spring-boot-starter.version>
 	</properties>
 
 	<dependencies>
 		<!-- Spring framework -->
-    <dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
@@ -37,10 +36,14 @@
         <artifactId>spring-boot-starter-validation</artifactId>
     </dependency>
 
-    <!-- Database -->
-    <dependency>
+		<!-- Database -->
+		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
+    	<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-database-postgresql</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -57,42 +60,36 @@
       <version>${mybatis-spring-boot-starter.version}</version>
     </dependency>
 
-    <!-- Validation -->
-    <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
-    </dependency>
-
-    <!-- Common dependencies -->
+		<!-- Common dependencies -->
+		<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok-mapstruct-binding</artifactId>
+				<version>0.2.0</version>
+		</dependency>
     <dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
 		</dependency>
-    <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
-    </dependency>
     <dependency>
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct</artifactId>
       <version>${mapstruct.version}</version>
     </dependency>
 
-    <!-- Documentation -->
-    <dependency>
-			 <groupId>io.springfox</groupId>
-			 <artifactId>springfox-boot-starter</artifactId>
-			 <version>${swagger.version}</version>
-		</dependency>
-    <!-- Freemarker is needed to handle Redoc page in /templates/api-documentation/html -->
-    <dependency>
+		<!-- Documentation -->
+		<dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <version>${springdoc.version}</version>
+   </dependency>
+		<!-- Freemarker is needed to handle Redoc page in /templates/api-documentation/html -->
+		<dependency>
       <groupId>org.freemarker</groupId>
       <artifactId>freemarker</artifactId>
     </dependency>
 
-    <!-- Test -->
-    <dependency>
+		<!-- Test -->
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -110,7 +107,7 @@
       <id>dev</id>
       <properties>
         <!-- Spring profile activated with this mvn profile -->
-        <activatedProperties>dev</activatedProperties>
+				<activatedProperties>dev</activatedProperties>
       </properties>
       <activation>
         <activeByDefault>true</activeByDefault>
@@ -124,20 +121,12 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
 
 			<plugin>
 					<groupId>org.codehaus.gmaven</groupId>
 					<artifactId>groovy-maven-plugin</artifactId>
-					<version>2.0</version>
+					<version>2.1.1</version>
 					<executions>
 						<execution>
 							<id>create-migration</id>
@@ -149,6 +138,27 @@
 							</configuration>
 						</execution>
 					</executions>
+				</plugin>
+			  <plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.13.0</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+						<annotationProcessorPaths>
+								<path>
+										<groupId>org.projectlombok</groupId>
+										<artifactId>lombok</artifactId>
+										<version>${lombok.version}</version>
+								</path>
+							 <path>
+								 <groupId>org.mapstruct</groupId>
+								 <artifactId>mapstruct-processor</artifactId>
+								 <version>${mapstruct.version}</version>
+							 </path>
+						</annotationProcessorPaths>
+					</configuration>
 				</plugin>
 		</plugins>
 	</build>
