@@ -1,3 +1,16 @@
+# How to run project?
+
+You need:
+  - maven,
+  - java 21,
+  - docker and docker compose. Preferably docker desktop
+
+For maven and java management https://sdkman.io/install is a good tool.
+
+Then go to docker/dev folder and run command `docker compose up -d`
+after its done you should be able to run. Just enter `BackendApplicaiton` and hit green button.
+
+
 # DEFAULT TEMPLATE CONFIGURATION
 A template to init new projects. Default configuration consists of:
 
